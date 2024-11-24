@@ -166,6 +166,19 @@ function HotelDetails() {
   };
 
   /**
+   * Calculates the room price based on check-in and check-out dates, number of rooms, and price per room.
+   *
+   * @returns {number} - The calculated room price.
+   */
+  const calculateRoomPrice = () => {
+    const checkIn = new Date(bookingDetails.checkInDate);
+    const checkOut = new Date(bookingDetails.checkOutDate);
+    const msInDay = 1000 * 60 * 60 * 24;
+    const daysOfStay = Math.max(1, Math.ceil((checkOut - checkIn) / msInDay));
+    return Math.round(daysOfStay * bookingDetails.rooms * bookingDetails.perRoomPrice);
+  };
+
+  /**
    * Handles changes to the check-in and check-out dates.
    *
    * @param {Date} date - The selected date.
@@ -266,6 +279,16 @@ function HotelDetails() {
     );
   }
 
+  // Calculate the number of days of stay for price breakdown
+  const checkIn = new Date(bookingDetails.checkInDate);
+  const checkOut = new Date(bookingDetails.checkOutDate);
+  const msInDay = 1000 * 60 * 60 * 24;
+  const daysOfStay = Math.max(1, Math.ceil((checkOut - checkIn) / msInDay));
+
+  // Calculate room price and guests fee
+  const roomPrice = bookingDetails.perRoomPrice * bookingDetails.rooms * daysOfStay;
+  const guestsFee = bookingDetails.perGuestFee * bookingDetails.guests * daysOfStay;
+
   return (
     <div className="hotel-details-page">
       {/* Image Gallery Section */}
@@ -277,6 +300,7 @@ function HotelDetails() {
           {hotel.additionalImages && hotel.additionalImages.length > 0 ? (
             hotel.additionalImages.map((image, index) => (
               <div key={index} className="thumbnail">
+                {/* Corrected alt attribute with backticks and curly braces */}
                 <img src={image} alt={`Additional View ${index + 1}`} />
               </div>
             ))
@@ -332,7 +356,8 @@ function HotelDetails() {
         <div className="booking-section">
           {/* Price Details */}
           <div className="price-details">
-            <div className="current-price">₹{bookingDetails.price}</div>
+            {/* Display the actual room price in red */}
+            <div className="current-price">₹{roomPrice}</div>
             <div className="original-price">
               {/* Uncomment and update if needed
               <span>₹6029</span>
@@ -412,7 +437,7 @@ function HotelDetails() {
             </p>
             <p>
               <span>Total price</span>
-              <span className="total-amount">₹{bookingDetails.price}</span>
+              <span className="total-amount">₹{roomPrice + guestsFee}</span>
             </p>
           </div>
 
