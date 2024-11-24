@@ -1,0 +1,114 @@
+/* BookingConfirmation.css */
+
+/* Booking Notice */
+.booking-notice {
+    color: #28a745; /* Green color to signify success */
+    font-weight: bold;
+    margin-top: 15px;
+    font-size: 1.1rem;
+  }
+  
+  /* Booking Details Card */
+  .booking-details-card {
+    /* If you wish to add additional styles beyond Tailwind's 'bg-white', 'rounded-lg', 'shadow-md', 'p-6' */
+    /* Example: Adding a subtle border */
+    border: 1px solid #e2e8f0; /* Light gray border */
+  }
+  
+  /* Payment Summary */
+  .price-breakdown {
+    /* Additional styles if needed */
+  }
+  
+  .price-breakdown p {
+    /* Ensuring proper spacing and alignment */
+    margin-bottom: 8px;
+  }
+  
+  /* Total Payable Amount */
+  .total-payable {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  /* Cancel Booking Button */
+  .cancel-button-container {
+    /* Center the button */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .cancel-button {
+    background-color: #dc3545; /* Bootstrap's danger color */
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0.375rem; /* Equivalent to Tailwind's rounded-lg */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+  }
+  
+  .cancel-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+  }
+  
+  /* Thank You Note */
+  .thank-you-note {
+    margin-top: 30px;
+  }
+  
+  .thank-you-note h3 {
+    font-size: 1.25rem; /* Equivalent to Tailwind's text-xl */
+    font-weight: 500; /* Equivalent to Tailwind's font-medium */
+    color: #1a202c; /* Tailwind's text-gray-800 */
+  }
+  
+  .thank-you-note p {
+    color: #4a5568; /* Tailwind's text-gray-600 */
+    margin-top: 8px;
+  }
+  
+  .thank-you-note a {
+    color: #4299e1; /* Tailwind's text-blue-500 */
+    text-decoration: none;
+  }
+  
+  .thank-you-note a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Adjustments (if needed) */
+  /* Since Tailwind handles most responsive designs, additional media queries are optional */
+  /* Example: Adjusting font sizes on smaller screens */
+  
+  @media (max-width: 768px) {
+    .booking-notice {
+      font-size: 1rem;
+    }
+  
+    .cancel-button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+  
+    .thank-you-note h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .booking-notice {
+      font-size: 0.95rem;
+    }
+  
+    .cancel-button {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+  
+    .thank-you-note h3 {
+      font-size: 1rem;
+    }
+  }
+  

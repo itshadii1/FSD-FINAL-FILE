@@ -1,0 +1,46 @@
+/* App.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* index.css or App.css */
+
+:root {
+    --primary-color: #ff5a5f;
+    --secondary-color: #4A90E2;
+    --accent-color: #50E3C2;
+    --text-color: #333;
+    --muted-text-color: #777;
+    --background-color: #f8f8f8;
+    --font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family);
+    font-weight: 700;
+  }
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: var(--secondary-color);
+  }
+  
+  button {
+    cursor: pointer;
+    font-family: var(--font-family);
+  }
+  
+  input, select, textarea {
+    font-family: var(--font-family);
+  }
+  

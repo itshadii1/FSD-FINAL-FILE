@@ -1,0 +1,121 @@
+/* BookingDeleted.css */
+
+/* Main Container */
+.booking-deleted-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px 20px;
+    background-color: #fff3f3; /* Light red/pink background */
+    color: #a94442; /* Dark red text */
+    border: 1px solid #ebccd1; /* Border matching the background */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Deletion Confirmation Message */
+  .deletion-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .deletion-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #d9534f; /* Bootstrap's danger color */
+  }
+  
+  .deletion-message p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* Cancel Button Container */
+  .go-home-button-container {
+    margin-bottom: 30px;
+  }
+  
+  /* Cancel Button */
+  .go-home-button {
+    background-color: #d9534f; /* Bootstrap's danger color */
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .go-home-button:hover {
+    background-color: #c9302c;
+  }
+  
+  /* Informative Note */
+  .informative-note {
+    font-size: 1rem;
+    color: #a94442;
+  }
+  
+  .informative-note a {
+    color: #d9534f;
+    text-decoration: none;
+  }
+  
+  .informative-note a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .booking-deleted-container {
+      margin: 20px;
+      padding: 30px 15px;
+    }
+  
+    .deletion-icon {
+      font-size: 3rem;
+    }
+  
+    .deletion-message p {
+      font-size: 1.3rem;
+    }
+  
+    .go-home-button {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  
+    .informative-note {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .booking-deleted-container {
+      margin: 10px;
+      padding: 20px 10px;
+    }
+  
+    .deletion-icon {
+      font-size: 2.5rem;
+    }
+  
+    .deletion-message p {
+      font-size: 1.1rem;
+    }
+  
+    .go-home-button {
+      padding: 8px 16px;
+      font-size: 0.8rem;
+    }
+  
+    .informative-note {
+      font-size: 0.8rem;
+    }
+  }
+  

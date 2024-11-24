@@ -1,0 +1,192 @@
+/* PaymentPage.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.payment-page {
+  font-family: 'Roboto', sans-serif;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.alert-banner {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.payment-container {
+  display: flex;
+  gap: 2rem;
+}
+
+.left-section {
+  flex: 2;
+}
+
+.right-section {
+  flex: 1;
+}
+
+.details-card,
+.payment-method-card,
+.summary-card {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.section-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-heading .icon {
+  color: #ff5a5f;
+  margin-right: 0.5rem;
+}
+
+.details-form .form-group,
+.details-display p {
+  margin-bottom: 1rem;
+}
+
+.details-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.details-form input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.save-button,
+.edit-button,
+.book-button {
+  background-color: #ff5a5f;
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.save-button:hover,
+.edit-button:hover,
+.book-button:hover {
+  background-color: #e04848;
+}
+
+.details-display .edit-button {
+  margin-top: 1rem;
+}
+
+.secure-text {
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.payment-option {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.payment-option h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.payment-option p {
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.summary-card {
+  position: sticky;
+  top: 80px;
+}
+
+.hotel-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.hotel-name .icon {
+  color: #ff5a5f;
+  margin-right: 0.5rem;
+}
+
+.hotel-location {
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+.price-breakdown {
+  margin-top: 1.5rem;
+}
+
+.price-breakdown p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.price-breakdown hr {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.total-payable {
+  font-weight: bold;
+  color: #333;
+}
+
+.booking-notice {
+  color: #ff5a5f;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+@media (max-width: 992px) {
+  .payment-container {
+    flex-direction: column;
+  }
+
+  .right-section {
+    position: static;
+    top: 0;
+  }
+
+  .summary-card {
+    margin-top: 2rem;
+  }
+}
