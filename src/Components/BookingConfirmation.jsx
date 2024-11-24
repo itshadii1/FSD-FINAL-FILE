@@ -8,53 +8,87 @@ function BookingConfirmation() {
   const { bookingDetails, setBookingDetails } = useBooking(); // Access booking context
   const navigate = useNavigate(); // Hook for navigation
 
-  // Handler to cancel the booking
+  /**
+   * Handler to cancel the booking.
+   */
   const handleDeleteBooking = async () => {
     const confirmDelete = window.confirm(
       'Are you sure you want to cancel your booking? This action cannot be undone.'
     );
 
     if (confirmDelete) {
-      console.log('Booking is being cancelled...'); // Debugging log
+      try {
+        const response = await fetch(`http://localhost:3001/bookings/${bookingDetails.id}`, {
+          method: 'DELETE',
+        });
 
-      if (bookingDetails.id) {
-        try {
-          const response = await fetch(`http://localhost:3001/bookings/${bookingDetails.id}`, {
-            method: 'DELETE',
-          });
-
-          if (!response.ok) {
-            throw new Error('Failed to cancel the booking.');
-          }
-
-          console.log('Booking cancelled successfully.'); // Debugging log
-
-          // Clear booking details from context
-          setBookingDetails({
-            id: null,
-            hotelName: "",
-            hotelLocation: "",
-            price: 802,
-            checkInDate: new Date(),
-            checkOutDate: new Date(new Date().setDate(new Date().getDate() + 1)), // Reset to default 1-day stay
-            rooms: 1,
-            guests: 1,
-            perRoomPrice: 500,
-            perGuestFee: 50,
-          });
-
-          // Navigate to BookingDeleted page
-          navigate('/deleted');
-        } catch (error) {
-          console.error('Error cancelling the booking:', error);
-          alert('There was an error cancelling your booking. Please try again.');
+        if (!response.ok) {
+          throw new Error('Failed to cancel the booking.');
         }
-      } else {
-        console.error('No booking ID found.');
-        alert('Unable to cancel the booking as no booking ID was found.');
+
+        // Clear booking details from context
+        setBookingDetails({
+          id: null,
+          hotelName: '',
+          hotelLocation: '',
+          price: 0, // Reset to 0 to reflect no active booking
+          checkInDate: null, // Reset dates to null
+          checkOutDate: null,
+          rooms: 1,
+          guests: 1,
+          perRoomPrice: 500, // Default per room price
+          perGuestFee: 50,   // Default per guest fee
+        });
+
+        // Navigate to BookingDeleted page
+        navigate('/deleted');
+      } catch (error) {
+        console.error('Error cancelling the booking:', error);
+        alert('There was an error cancelling your booking. Please try again.');
       }
     }
   };
+
+  /**
+   * Formats a given date string into a more readable format.
+   */
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
+  // Calculate the number of days of stay
+  const checkIn = new Date(bookingDetails.checkInDate);
+  const checkOut = new Date(bookingDetails.checkOutDate);
+  const msInDay = 1000 * 60 * 60 * 24;
+  const daysOfStay = Math.max(1, Math.ceil((checkOut - checkIn) / msInDay));
+
+  // Calculate room price and guests fee
+  const roomPrice = bookingDetails.perRoomPrice * bookingDetails.rooms * daysOfStay;
+  const guestsFee = bookingDetails.perGuestFee * bookingDetails.guests * daysOfStay;
+
+  /**
+   * Calculates the total payable amount.
+   */
+  const calculateTotalAmount = () => {
+    const taxesAndFees = 290;
+    const discount = 200;
+    return roomPrice + guestsFee + taxesAndFees - discount;
+  };
+
+  /**
+   * Ensures that booking details are present before rendering.
+   */
+  React.useEffect(() => {
+    if (!bookingDetails.id) {
+      navigate('/'); // No active booking found, redirect to homepage
+    }
+  }, [bookingDetails.id, navigate]);
 
   return (
     <div className="container mx-auto px-6 py-10">
@@ -81,16 +115,13 @@ function BookingConfirmation() {
           <div>
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Stay Information</h3>
             <p className="text-gray-600">
-              <strong>Check-in:</strong>{' '}
-              {bookingDetails.checkInDate ? new Date(bookingDetails.checkInDate).toDateString() : 'N/A'}
+              <strong>Check-in:</strong> {formatDate(bookingDetails.checkInDate)}
             </p>
             <p className="text-gray-600">
-              <strong>Check-out:</strong>{' '}
-              {bookingDetails.checkOutDate ? new Date(bookingDetails.checkOutDate).toDateString() : 'N/A'}
+              <strong>Check-out:</strong> {formatDate(bookingDetails.checkOutDate)}
             </p>
             <p className="text-gray-600">
-              <strong>Guests:</strong>{' '}
-              {bookingDetails.rooms} Room{bookingDetails.rooms > 1 ? 's' : ''}, {bookingDetails.guests} Guest{bookingDetails.guests > 1 ? 's' : ''}
+              <strong>Guests:</strong> {bookingDetails.rooms} Room{bookingDetails.rooms > 1 ? 's' : ''}, {bookingDetails.guests} Guest{bookingDetails.guests > 1 ? 's' : ''}
             </p>
           </div>
 
@@ -99,7 +130,11 @@ function BookingConfirmation() {
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Payment Summary</h3>
             <p className="text-gray-600 flex justify-between">
               <span>Room Price ({bookingDetails.rooms} Room{bookingDetails.rooms > 1 ? 's' : ''}):</span>
-              <span>₹{bookingDetails.price}</span>
+              <span>₹{roomPrice}</span>
+            </p>
+            <p className="text-gray-600 flex justify-between">
+              <span>Guests Fee:</span>
+              <span>₹{guestsFee}</span>
             </p>
             <p className="text-gray-600 flex justify-between">
               <span>Discount:</span>
@@ -112,7 +147,7 @@ function BookingConfirmation() {
             <hr className="my-2" />
             <p className="font-semibold text-gray-800 flex justify-between">
               <span>Total Amount:</span>
-              <span>₹{bookingDetails.price + 290 - 200}</span>
+              <span>₹{calculateTotalAmount()}</span>
             </p>
           </div>
         </div>
@@ -135,8 +170,8 @@ function BookingConfirmation() {
         </h3>
         <p className="text-gray-600 mt-2">
           If you have any questions, feel free to contact us at{' '}
-          <a href="mailto:support@hotel.com" className="text-blue-500">
-            support@hotel.com
+          <a href="mailto:support@tripnest.com" className="text-blue-500">
+            support@tripnest.com
           </a>
         </p>
       </div>
