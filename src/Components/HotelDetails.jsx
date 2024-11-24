@@ -300,7 +300,6 @@ function HotelDetails() {
           {hotel.additionalImages && hotel.additionalImages.length > 0 ? (
             hotel.additionalImages.map((image, index) => (
               <div key={index} className="thumbnail">
-                {/* Corrected alt attribute with backticks and curly braces */}
                 <img src={image} alt={`Additional View ${index + 1}`} />
               </div>
             ))
